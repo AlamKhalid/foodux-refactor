@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import _ from "lodash";
-// import LoginPopup from "./loginPopup";
+import Login from "../components/popups/Login";
 // import SignUpPopup from "./signUpPopup";
 // import SignUpOptions from "./signUpOptions";
 // import SignUpFormRes from "./signUpFormRes";
 
-const LandingNavbar = ({ user, isHome, active }) => {
+const LandingNavbar = ({ user, isHome }) => {
   const [navbarClasses, setNavbarClasses] = useState("navbar-transparent");
 
   useEffect(() => {
@@ -29,9 +29,9 @@ const LandingNavbar = ({ user, isHome, active }) => {
         }`}
       >
         <div className="container">
-          <NavLink className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/">
             FooDux
-          </NavLink>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -50,41 +50,29 @@ const LandingNavbar = ({ user, isHome, active }) => {
             <ul className="navbar-nav">
               <NavLink
                 to="/"
-                className={`nav-item nav-link mr-3 fit-width ${
-                  active === 0 && "b-bot"
-                }`}
+                exact
+                className="nav-item nav-link mr-3 fit-width"
               >
                 Home
               </NavLink>
               <NavLink
                 to="/about-us"
-                className={`nav-item nav-link mr-3 fit-width ${
-                  active === 1 && "b-bot"
-                }`}
+                className="nav-item nav-link mr-3 fit-width"
               >
                 About Us
               </NavLink>
               <NavLink
                 to="/restaurants"
-                className={`nav-item nav-link mr-3 fit-width ${
-                  active === 2 && "b-bot"
-                }`}
+                className="nav-item nav-link mr-3 fit-width"
               >
                 Restaurants
               </NavLink>
-              <NavLink
-                to="/foods"
-                className={`nav-item nav-link mr-3 fit-width ${
-                  active === 3 && "b-bot"
-                }`}
-              >
+              <NavLink to="/foods" className="nav-item nav-link mr-3 fit-width">
                 Foods
               </NavLink>
               <NavLink
                 to="/cities"
-                className={`nav-item nav-link mr-3 fit-width ${
-                  active === 4 && "b-bot"
-                }`}
+                className="nav-item nav-link mr-3 fit-width"
               >
                 Cities
               </NavLink>
@@ -159,8 +147,8 @@ const LandingNavbar = ({ user, isHome, active }) => {
           </div>
         </div>
       </nav>
-      {/* <LoginPopup />
-      <SignUpOptions />
+      <Login />
+      {/* <SignUpOptions />
       <SignUpFormRes />
       <SignUpPopup /> */}
     </React.Fragment>

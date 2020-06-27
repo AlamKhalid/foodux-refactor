@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import api from "../middleware/api";
+import { apiCallBegan } from "../middleware/api";
 
 const homeSlice = createSlice({
   name: "home",
@@ -10,21 +10,68 @@ const homeSlice = createSlice({
     loading: false,
   },
   reducers: {
-    itemRequested: (state, action) => {
+    itemsRequested: (state) => {
       state.loading = true;
-      state[action.payload.item] = action.payload.data;
     },
-    itemsReceived: (state, action) => {
+    citiesReceived: (state, action) => {
       state.loading = false;
+      state.cities = action.payload;
     },
-    itemsFailed: (state, action) => {
+    foodsReceived: (state, action) => {
+      state.loading = false;
+      state.foods = action.payload;
+    },
+    restaurantsReceived: (state, action) => {
+      state.loading = false;
+      state.restaurants = action.payload;
+    },
+    itemsFailed: (state) => {
       state.loading = false;
     },
   },
 });
 
-const { itemRequested, itemsReceived, itemsFailed } = homeSlice.actions;
+const {
+  itemsRequested,
+  restaurantsReceived,
+  itemsFailed,
+  citiesReceived,
+  foodsReceived,
+} = homeSlice.actions;
 
-export const loadItem = () => (dispatch) => {};
+export const loadRestaurants = () => (dispatch) => {
+  dispatch(
+    apiCallBegan({
+      url: "",
+      onStart: itemsRequested.type,
+      onSuccess: restaurantsReceived.type,
+      onError: itemsFailed.type,
+    })
+  );
+};
+
+export const loadCities = () => (dispatch) => {
+  dispatch(
+    apiCallBegan({
+      url: "/cities",
+      onStart: itemsRequested.type,
+      onSuccess: citiesReceived.type,
+      onError: itemsFailed.type,
+    })
+  );
+};
+
+export const loadFoods = () => (dispatch) => {
+  dispatch(
+    apiCallBegan({
+      url: "/foods",
+      onStart: itemsRequested.type,
+      onSuccess: foodsReceived.type,
+      onError: itemsFailed.type,
+    })
+  );
+};
+
+export const getHome = (state) => state.home;
 
 export default homeSlice.reducer;

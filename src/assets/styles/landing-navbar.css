@@ -1,0 +1,37 @@
+.navbar-toggler {
+  border-color: white !important;
+}
+
+.nav-link {
+  color: white !important;
+  font-size: 1.1rem;
+  transition: 0.5s all;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  background-color: #404241;
+}
+
+.navbar-brand {
+  font-size: 1.5rem !important;
+  color: white !important;
+  letter-spacing: 4px;
+  font-weight: 500;
+}
+
+.active {
+  border-bottom: 1px solid white;
+}
+
+.navbar-transparent {
+  background-color: #0003;
+}
+
+.navbar-black {
+  background-color: black;
+}
+
+.fit-width {
+  width: fit-content;
+}

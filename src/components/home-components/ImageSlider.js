@@ -1,5 +1,10 @@
 import React from "react";
 
+// importing the images for slider
+import city from "../../assets/images/home/city.jpeg";
+import restaurant from "../../assets/images/home/restaurant.jpeg";
+import food from "../../assets/images/home/food.jpeg";
+
 const ImageSlider = () => {
   return (
     <div id="imageSlider" className="carousel slide" data-ride="carousel">
@@ -15,33 +20,21 @@ const ImageSlider = () => {
       </ol>
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img
-            className="d-block w-100 landing-img"
-            src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-            alt=""
-          />
+          <img className="d-block w-100 landing-img" src={restaurant} alt="" />
           <div className="carousel-caption d-none d-md-block">
             <h5 style={{ color: "white" }}>Restaurants</h5>
             <p>Eat in over 1000+ cafes with exclusive discounts and reviews</p>
           </div>
         </div>
         <div className="carousel-item">
-          <img
-            className="d-block w-100 landing-img"
-            src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
-            alt=""
-          />
+          <img className="d-block w-100 landing-img" src={food} alt="" />
           <div className="carousel-caption d-none d-md-block">
             <h5 style={{ color: "white" }}>Food</h5>
             <p>Grab on to your favourite food in reasonable price</p>
           </div>
         </div>
         <div className="carousel-item">
-          <img
-            className="d-block w-100 landing-img"
-            src="https://images.unsplash.com/photo-1465815367149-ca149851a3a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1133&q=80"
-            alt=""
-          />
+          <img className="d-block w-100 landing-img" src={city} alt="" />
           <div className="carousel-caption d-none d-md-block">
             <h5 style={{ color: "white" }}>City</h5>
             <p>

@@ -1,0 +1,45 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.landing-img {
+  height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.popup-row,
+.home-hr {
+  display: inline-block;
+  width: 32%;
+  border-color: black;
+}
+
+.home-hr {
+  margin-top: 25px;
+  border-width: 3px;
+}
+
+.nav-menu-pic {
+  width: 100%;
+  height: 78vh;
+}
+
+.full-display {
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal-open {
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-right: 0 !important;
+}

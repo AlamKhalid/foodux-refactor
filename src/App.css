@@ -629,6 +629,7 @@ input::-webkit-inner-spin-button {
 input:disabled {
   cursor: not-allowed;
 }
+
 .timeline {
   position: relative;
   list-style: none;

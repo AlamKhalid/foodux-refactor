@@ -4,6 +4,10 @@ import jwtDecode from "jwt-decode";
 import { ToastContainer } from "react-toastify";
 // import ProtectedRoute from "./components/common/protectedRoute";
 import Home from "./pages/Home";
+import About from "./pages/About";
+import Restaurants from "./pages/Restaurants";
+import Foods from "./pages/Foods";
+import Cities from "./pages/Cities";
 // import FoodBlog from "./components/foodBlog";
 // import Settings from "./components/settings";
 // import DealsAndDiscounts from "./components/dealsAndDiscounts";
@@ -12,14 +16,14 @@ import Home from "./pages/Home";
 // import Logout from "./components/logout";
 // import Verify from "./components/verify";
 // import EditorPage from "./components/editor";
-// import AboutUs from "./components/aboutUs";
-// import Restaurants from "./components/restaurants";
-// import Foods from "./components/foods";
-// import Cities from "./components/cities";
 // import VerifyUserRoute from "./components/verifyUserRoute";
 import "react-toastify/dist/ReactToastify.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import "./App.css";
+import "./assets/styles/home.css";
+import "./assets/styles/footer.css";
+import "./assets/styles/landing-navbar.css";
+import "./assets/styles/about.css";
+// import "./App.css";
 import "./AppMediaQueries.css";
 
 const App = () => {
@@ -60,17 +64,16 @@ const App = () => {
             component={DealsAndDiscounts}
             user={user}
           />
-          <Route path="/about-us" render={() => <AboutUs user={user} />} />
-          <Route
-            path="/restaurants"
-            render={() => <Restaurants user={user} />}
-          />
-          <Route path="/foods" render={() => <Foods user={user} />} />
-          <Route path="/cities" render={() => <Cities user={user} />} />
+          
+          
           <Route path="/:id/verify" component={VerifyUserRoute} />
           <Route path="/verify" render={() => <Verify user={user} />} />
           <Route path="/logout" component={Logout} /> */}
         {/* <Route path="/not-found" component={NotFound} /> */}
+        <Route path="/foods" component={Foods} />
+        <Route path="/cities" component={Cities} />
+        <Route path="/restaurants" component={Restaurants} />
+        <Route path="/about-us" component={About} />
         <Route path="/" exact component={Home} />
         {/* <Redirect to="/not-found" /> */}
       </Switch>
