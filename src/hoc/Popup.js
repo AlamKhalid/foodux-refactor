@@ -1,11 +1,11 @@
 import React from "react";
 import SocialIcons from "../components/common/SocialIcons";
 
-const Popup = (Component, title, social = true) => {
+const Popup = (Component, title, id, modalBodyClasses = "", social = true) => {
   return (props) => (
     <div
       className="modal fade"
-      id={`${title}Form`}
+      id={id}
       tabIndex="-1"
       role="dialog"
       aria-labelledby={`${title}FormTitle`}
@@ -26,7 +26,7 @@ const Popup = (Component, title, social = true) => {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className="modal-body">
+          <div className={`modal-body ${modalBodyClasses}`}>
             <Component {...props} />
             {social && <SocialIcons />}
           </div>

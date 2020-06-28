@@ -43,3 +43,26 @@
   overflow-y: scroll;
   padding-right: 0 !important;
 }
+
+.b-right-black {
+  border-right: 3px solid black;
+}
+
+.text-box:focus {
+  border-color: black !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.2rem black !important;
+}
+
+.add-spacing {
+  letter-spacing: 4px;
+}
+
+.foodux-btn {
+  background-color: black !important;
+  color: #f8f9fa !important;
+}
+
+.foodux-btn:hover {
+  background-color: #404241 !important;
+}

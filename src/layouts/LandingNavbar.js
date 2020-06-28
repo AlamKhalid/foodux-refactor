@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import _ from "lodash";
 import Login from "../components/popups/Login";
-// import SignUpPopup from "./signUpPopup";
-// import SignUpOptions from "./signUpOptions";
-// import SignUpFormRes from "./signUpFormRes";
+import SignUp from "../components/popups/Signup";
+import SignUpOptions from "../components/popups/SignupOptions";
+import SignUpRes from "../components/popups/SignupRes";
 
 const LandingNavbar = ({ user, isHome }) => {
   const [navbarClasses, setNavbarClasses] = useState("navbar-transparent");
@@ -127,7 +127,7 @@ const LandingNavbar = ({ user, isHome }) => {
                     <button
                       className="btn btn-outline-light mr-2"
                       data-toggle="modal"
-                      data-target="#loginForm"
+                      data-target="#login"
                     >
                       Login
                     </button>
@@ -136,7 +136,7 @@ const LandingNavbar = ({ user, isHome }) => {
                     <button
                       className="btn btn-outline-light"
                       data-toggle="modal"
-                      data-target="#signUpOptions"
+                      data-target="#choose-option"
                     >
                       Sign Up
                     </button>
@@ -148,9 +148,9 @@ const LandingNavbar = ({ user, isHome }) => {
         </div>
       </nav>
       <Login />
-      {/* <SignUpOptions />
-      <SignUpFormRes />
-      <SignUpPopup /> */}
+      <SignUpOptions />
+      <SignUpRes />
+      <SignUp />
     </React.Fragment>
   );
 };

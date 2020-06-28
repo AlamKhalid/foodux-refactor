@@ -8,13 +8,13 @@ import About from "./pages/About";
 import Restaurants from "./pages/Restaurants";
 import Foods from "./pages/Foods";
 import Cities from "./pages/Cities";
+import Verify from "./pages/Verify";
 // import FoodBlog from "./components/foodBlog";
 // import Settings from "./components/settings";
 // import DealsAndDiscounts from "./components/dealsAndDiscounts";
 // import Profile from "./components/profile";
 // import NotFound from "./components/notFound";
 // import Logout from "./components/logout";
-// import Verify from "./components/verify";
 // import EditorPage from "./components/editor";
 // import VerifyUserRoute from "./components/verifyUserRoute";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,6 +23,7 @@ import "./assets/styles/home.css";
 import "./assets/styles/footer.css";
 import "./assets/styles/landing-navbar.css";
 import "./assets/styles/about.css";
+import "./assets/styles/verify.css";
 // import "./App.css";
 import "./AppMediaQueries.css";
 
@@ -67,7 +68,6 @@ const App = () => {
           
           
           <Route path="/:id/verify" component={VerifyUserRoute} />
-          <Route path="/verify" render={() => <Verify user={user} />} />
           <Route path="/logout" component={Logout} /> */}
         {/* <Route path="/not-found" component={NotFound} /> */}
         <Route path="/foods" component={Foods} />
@@ -75,6 +75,7 @@ const App = () => {
         <Route path="/restaurants" component={Restaurants} />
         <Route path="/about-us" component={About} />
         <Route path="/" exact component={Home} />
+        <Route path="/verify" component={Verify} />
         {/* <Redirect to="/not-found" /> */}
       </Switch>
     </React.Fragment>

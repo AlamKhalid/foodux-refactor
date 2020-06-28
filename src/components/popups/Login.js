@@ -1,8 +1,12 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
 import Form from "../common/Form";
 import Popup from "../../hoc/Popup";
-// import { login } from "../services/authService";
-import { toast } from "react-toastify";
+import { loginUser } from "./../../store/slices/user";
+import { login } from "../../services/authService";
+import LoadingButton from "./../common/LoadingButton";
 
 class Login extends Form {
   state = {
@@ -10,28 +14,33 @@ class Login extends Form {
       email: "",
       password: "",
     },
+    loading: false,
   };
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    //   const response = await login(this.state.data);
-    //   if (!response) {
-    //     toast.error("Invalid Email or Password");
-    //   } else {
-    //     const jwt = response.data.token;
-    //     localStorage.setItem("token", jwt);
-    //     localStorage.setItem("isLoggedIn", true);
-    //     if (response.data.isVerified && response.data.filledDetails) {
-    //       localStorage.setItem("isVerified", true);
-    //       localStorage.setItem("filledDetails", true);
-    //       window.location = "/newsfeed";
-    //     } else {
-    //       if (response.data.isVerified) localStorage.setItem("isVerified", true);
-    //       else localStorage.setItem("isVerified", "");
-    //       localStorage.setItem("filledDetails", "");
-    //       window.location = "/verify";
-    //     }
-    //   }
+    this.setState({ loading: true });
+    const response = await login(this.state.data);
+    if (!response) {
+      toast.error("Invalid Email or Password");
+      this.setState({ loading: false });
+    } else {
+      this.props.login(response.data.token);
+      this.setState({ loading: false });
+      // const jwt = response.data.token;
+      // localStorage.setItem("token", jwt);
+      // localStorage.setItem("isLoggedIn", true);
+      // if (response.data.isVerified && response.data.filledDetails) {
+      //   localStorage.setItem("isVerified", true);
+      //   localStorage.setItem("filledDetails", true);
+      //   window.location = "/newsfeed";
+      // } else {
+      //   if (response.data.isVerified) localStorage.setItem("isVerified", true);
+      //   else localStorage.setItem("isVerified", "");
+      //   localStorage.setItem("filledDetails", "");
+      //   window.location = "/verify";
+      // }
+    }
   };
 
   render() {
@@ -43,7 +52,11 @@ class Login extends Form {
           <br />
           {this.renderInput("password", "Password", "password")}
           <br />
-          {this.renderButton("Login")}
+          {this.state.loading ? (
+            <LoadingButton label={"Logging in..."} />
+          ) : (
+            this.renderButton("Login")
+          )}
         </form>
         <div className="d-flex mt-3">
           <hr className="popup-row" />
@@ -55,4 +68,13 @@ class Login extends Form {
   }
 }
 
-export default Popup(Login, "login");
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    login: (token) => dispatch(loginUser({ token })),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchtoProps
+)(withRouter(Popup(Login, "login", "login")));
