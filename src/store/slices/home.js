@@ -7,6 +7,7 @@ const homeSlice = createSlice({
     restaurants: [],
     cities: [],
     foods: [],
+    categories: [],
     loading: false,
   },
   reducers: {
@@ -25,6 +26,10 @@ const homeSlice = createSlice({
       state.loading = false;
       state.restaurants = action.payload;
     },
+    categoriesReceived: (state, action) => {
+      state.loading = false;
+      state.categories = action.payload;
+    },
     itemsFailed: (state) => {
       state.loading = false;
     },
@@ -37,12 +42,13 @@ const {
   itemsFailed,
   citiesReceived,
   foodsReceived,
+  categoriesReceived,
 } = homeSlice.actions;
 
 export const loadRestaurants = () => (dispatch) => {
   dispatch(
     apiCallBegan({
-      url: "",
+      url: "users/restaurants/get",
       onStart: itemsRequested.type,
       onSuccess: restaurantsReceived.type,
       onError: itemsFailed.type,
@@ -67,6 +73,17 @@ export const loadFoods = () => (dispatch) => {
       url: "/foods",
       onStart: itemsRequested.type,
       onSuccess: foodsReceived.type,
+      onError: itemsFailed.type,
+    })
+  );
+};
+
+export const loadCategories = () => (dispatch) => {
+  dispatch(
+    apiCallBegan({
+      url: "/categories",
+      onStart: itemsRequested.type,
+      onSuccess: categoriesReceived.type,
       onError: itemsFailed.type,
     })
   );

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 import "./index.css";
 import "popper.js";
@@ -10,13 +11,15 @@ import "bootstrap/dist/js/bootstrap";
 import "jquery/dist/jquery.min.js";
 import "font-awesome/css/font-awesome.css";
 import * as serviceWorker from "./serviceWorker";
-import store from "./store/store";
+import config from "./store/store";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+  <Provider store={config.store}>
+    <PersistGate loading={null} persistor={config.persistor}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

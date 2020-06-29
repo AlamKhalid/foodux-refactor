@@ -6,3 +6,8 @@
   font-size: 50px;
   font-weight: bolder;
 }
+
+.progress-div {
+  width: 300px;
+  margin: 150px auto;
+}

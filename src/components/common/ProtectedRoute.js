@@ -1,13 +1,19 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/slices/user";
 
-const ProtectedRoute = (Component) => {
+const ProtectedRoute = ({ component: Component, render, ...rest }) => {
   const { isAuthenticated } = useSelector(getUser);
+
   if (!isAuthenticated) return <Redirect to="/" />;
 
-  return (props) => <Component {...props} />;
+  return (
+    <Route
+      {...rest}
+      render={(props) => (Component ? <Component {...props} /> : render(props))}
+    />
+  );
 };
 
 export default ProtectedRoute;

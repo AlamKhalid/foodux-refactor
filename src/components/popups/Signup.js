@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import _ from "lodash";
+import $ from "jquery";
 import Form from "../common/Form";
 import Popup from "../../hoc/Popup";
 import { loginUser } from "./../../store/slices/user";
@@ -77,13 +78,9 @@ class SignUp extends Form {
     } else {
       this.props.login(response.headers["x-auth-token"]);
       this.setState({ loading: false });
+      $("#signup").modal("hide");
+      this.props.history.push("/verify");
     }
-    //   localStorage.setItem("token", response.headers["x-auth-token"]);
-    //   localStorage.setItem("isLoggedIn", true);
-    //   localStorage.setItem("isVerified", "");
-    //   localStorage.setItem("filledDetails", "");
-    //   window.location = "/verify";
-    // }
   };
 
   render() {

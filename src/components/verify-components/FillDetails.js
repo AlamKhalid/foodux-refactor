@@ -1,13 +1,12 @@
 import React from "react";
-import FillDetailsUser from "./fillDetailsUser";
-import FillDetailsRes from "./fillDetailsRes";
+import { useSelector } from "react-redux";
+import FillDetailsUser from "./FillDetailsUser";
+import FillDetailsRes from "./FillDetailsRes";
+import { getUser } from "../../store/slices/user";
 
-const FillDetails = ({ user }) => {
-  return user.isRestaurant ? (
-    <FillDetailsRes user={user} />
-  ) : (
-    <FillDetailsUser user={user} />
-  );
+const FillDetails = () => {
+  const { user } = useSelector(getUser);
+  return user.isRestaurant ? <FillDetailsRes /> : <FillDetailsUser />;
 };
 
 export default FillDetails;

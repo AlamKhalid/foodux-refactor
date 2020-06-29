@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import $ from "jquery";
 import Form from "../common/Form";
 import Popup from "../../hoc/Popup";
 import { loginUser } from "./../../store/slices/user";
@@ -27,19 +28,8 @@ class Login extends Form {
     } else {
       this.props.login(response.data.token);
       this.setState({ loading: false });
-      // const jwt = response.data.token;
-      // localStorage.setItem("token", jwt);
-      // localStorage.setItem("isLoggedIn", true);
-      // if (response.data.isVerified && response.data.filledDetails) {
-      //   localStorage.setItem("isVerified", true);
-      //   localStorage.setItem("filledDetails", true);
-      //   window.location = "/newsfeed";
-      // } else {
-      //   if (response.data.isVerified) localStorage.setItem("isVerified", true);
-      //   else localStorage.setItem("isVerified", "");
-      //   localStorage.setItem("filledDetails", "");
-      //   window.location = "/verify";
-      // }
+      $("#login").modal("hide");
+      this.props.history.push("/newsfeed");
     }
   };
 

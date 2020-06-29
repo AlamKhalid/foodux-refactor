@@ -66,3 +66,20 @@
 .foodux-btn:hover {
   background-color: #404241 !important;
 }
+
+.foodux-link {
+  color: black;
+  cursor: pointer;
+}
+
+.foodux-link:hover {
+  text-decoration: underline !important;
+  color: #262626 !important;
+}
+
+.right-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}

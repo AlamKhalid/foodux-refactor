@@ -19,7 +19,7 @@ const Verify = () => {
       setLoading(false);
     }
     checkVerification();
-  }, []);
+  }, [user._id]);
 
   return loading ? <Spinner /> : isVerified ? <Verified /> : <Unverified />;
 };

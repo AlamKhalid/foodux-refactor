@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import _ from "lodash";
+import { useSelector } from "react-redux";
 import Login from "../components/popups/Login";
 import SignUp from "../components/popups/Signup";
 import SignUpOptions from "../components/popups/SignupOptions";
 import SignUpRes from "../components/popups/SignupRes";
+import { getUser } from "../store/slices/user";
 
-const LandingNavbar = ({ user, isHome }) => {
+const LandingNavbar = ({ isHome }) => {
   const [navbarClasses, setNavbarClasses] = useState("navbar-transparent");
+  const { isAuthenticated, user } = useSelector(getUser);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,10 +78,10 @@ const LandingNavbar = ({ user, isHome }) => {
               >
                 Cities
               </NavLink>
-              {!_.isEmpty(user) ? (
+              {isAuthenticated ? (
                 <React.Fragment>
                   <div className="dropdown show fit-width">
-                    <NavLink
+                    <Link
                       className="nav-item nav-link dropdown-toggle"
                       to="#"
                       id="dropdownMenuLink"
@@ -88,7 +90,7 @@ const LandingNavbar = ({ user, isHome }) => {
                       aria-expanded="false"
                     >
                       {user.name}
-                    </NavLink>
+                    </Link>
 
                     <div
                       className="dropdown-menu"

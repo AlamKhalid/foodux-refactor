@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Multiselect } from "multiselect-react-dropdown";
-import ChooseBranch from "./chooseBranch";
-import { getTypes } from "../services/typeService";
-import { getFoods } from "../services/foodService";
-import { addDetails } from "../services/userService";
+import ChooseBranch from "../common/ChooseBranch";
+import { getTypes } from "../../services/typeService";
+import { addDetails } from "../../services/userService";
 import { storage } from "../../firebase/index";
+import { getHome } from "../../store/slices/home";
+import { getUser } from "../../store/slices/user";
+import Spinner from "./../common/Spinner";
 
-const FillDetailsRes = ({ user }) => {
+const FillDetailsRes = () => {
   const [phone, setPhone] = useState("");
   const [type, setType] = useState([]);
   const [typeOptions, setTypeOptions] = useState([]);
   const [serves, setServes] = useState([]);
-  const [serveOptions, setServeOptions] = useState([]);
   const [cities, setCities] = useState([]);
   const [branches, setBranches] = useState([]);
   const [branchOptions, setBranchOptions] = useState([]);
@@ -20,6 +23,11 @@ const FillDetailsRes = ({ user }) => {
   const [branchCount, setBranchCount] = useState([{ id: 1 }]);
   const [profilePic, setProfilePic] = useState("");
   const [menuPic, setMenuPic] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
+  const { user } = useSelector(getUser);
+  const { foods: serveOptions, cities: city } = useSelector(getHome);
 
   const commonStyle = {
     inputField: {
@@ -37,15 +45,12 @@ const FillDetailsRes = ({ user }) => {
 
   useEffect(() => {
     async function getData() {
-      // const { data: cities } = await getCities();
-      const { data: typeOptions } = await getTypes();
-      const { data: food } = await getFoods();
-      setServeOptions(food);
-      setTypeOptions(typeOptions);
-      setCities(cities);
+      const { data: types } = await getTypes();
+      setTypeOptions(types);
+      setCities(city);
     }
     getData();
-  }, []);
+  }, [city]);
 
   const addSubareas = (id) => {
     const city = cities.find((city) => city._id === id);
@@ -55,7 +60,7 @@ const FillDetailsRes = ({ user }) => {
 
   const submitDetails = async (event) => {
     event.preventDefault();
-    console.log(type);
+    setLoading(true);
     const response = await addDetails(user._id, {
       serves,
       type,
@@ -65,12 +70,11 @@ const FillDetailsRes = ({ user }) => {
       profilePic,
     });
     if (response) {
+      setLoading(false);
       toast("Details added successfully");
-      localStorage.setItem("filledDetails", true);
-      setTimeout(() => {
-        window.location = "/newsfeed";
-      }, 1000);
+      history.push("/newsfeed");
     } else {
+      setLoading(false);
       toast.error("Error adding details");
     }
   };
@@ -99,7 +103,9 @@ const FillDetailsRes = ({ user }) => {
     }
   };
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <div className="container mt-3 text-center mb-4">
       <div className="row">
         <div className="col-6">
