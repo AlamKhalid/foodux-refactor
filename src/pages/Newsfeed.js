@@ -1,5 +1,5 @@
 import React from "react";
-import CreatePost from "../components/Posts/CreatePost";
+import CreatePost from "../components/posts/CreatePost";
 import BothSide from "./../hoc/BothSide";
 import WrapWithNav from "./../hoc/WrapWithNav";
 // import Posts from "./posts";

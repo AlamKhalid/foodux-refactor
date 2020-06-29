@@ -1,5 +1,5 @@
 import React from "react";
-import HorizontalMenu from "../common/horizontalMenu";
+import HorizontalMenu from "../common/HorizontalMenu";
 
 const HiddenPosts = ({ user }) => {
   return (
