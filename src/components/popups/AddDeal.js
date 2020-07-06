@@ -10,7 +10,7 @@ import DiscountType from "../common/DiscountType";
 import MultiSelect from "../common/MultiSelect";
 import EditorPopup from "../../hoc/EditorPopup";
 import { storage } from "../../firebase/index";
-import { getUser } from "../../services/userService";
+import { getUser } from "../../store/slices/user";
 import "react-datepicker/dist/react-datepicker.css";
 
 const AddDeal = () => {
@@ -329,7 +329,7 @@ const AddDeal = () => {
                   >
                     <DatePicker
                       dateFormat="dd-MM-yyyy"
-                      className="expand up-icon"
+                      className="expand up-icon mr-2"
                       selected={validTill}
                       onChange={(date) => setValidTill(date)}
                     />

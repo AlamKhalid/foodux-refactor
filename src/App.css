@@ -229,56 +229,56 @@
   margin-bottom: 0.5rem;
 }
 
-/* .location-icon {
-  background: #ededed url("./icons/pin.png") no-repeat 9px center;
-} */
+.location-icon {
+  background: #ededed url("./assets/icons/pin.png") no-repeat 9px center;
+}
 
 input::-webkit-calendar-picker-indicator {
   display: none;
 }
 
-/* .dollar-icon {
-  background: #ededed url("./icons/dollar.png") no-repeat 9px center;
+.dollar-icon {
+  background: #ededed url("./assets/icons/dollar.png") no-repeat 9px center;
 }
 
 .restaurant-icon {
-  background: #ededed url("./icons/shop.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/shop.png") no-repeat 9px center;
 }
 
 .marker-icon {
-  background: #ededed url("./icons/marker.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/marker.png") no-repeat 9px center;
 }
 
 .eat-icon {
-  background: #ededed url("./icons/eat.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/eat.png") no-repeat 9px center;
 }
 
 .food-cross-icon {
-  background: #ededed url("./icons/food-cross.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/food-cross.png") no-repeat 9px center;
 }
 
 .mouth-icon {
-  background: #ededed url("./icons/mouth.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/mouth.png") no-repeat 9px center;
 }
 
 .lobby-icon {
-  background: #ededed url("./icons/lobby.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/lobby.png") no-repeat 9px center;
 }
 
 .ambience-icon {
-  background: #ededed url("./icons/ambience.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/ambience.png") no-repeat 9px center;
 }
 
 .review-icon {
-  background: #ededed url("./icons/review.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/review.png") no-repeat 9px center;
 }
 
 .star-icon {
-  background: #ededed url("./icons/star.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/star.png") no-repeat 9px center;
 }
 
 .search-icon {
-  background: #ededed url("./icons/search.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/search.png") no-repeat 9px center;
   width: 20vw;
   background-color: #fff;
   border: 2px solid white;
@@ -295,32 +295,32 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .plus-icon {
-  background: #ededed url("./icons/plus.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/plus.png") no-repeat 9px center;
 }
 
 .hand-icon {
-  background: #ededed url("./icons/hand.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/hand.png") no-repeat 9px center;
 }
 
 .close-icon {
-  background: #ededed url("./icons/close.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/close.png") no-repeat 9px center;
 }
 
 .tick-icon {
-  background: #ededed url("./icons/tick.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/tick.png") no-repeat 9px center;
 }
 
 .img-icon {
-  background: #ededed url("./icons/img.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/img.png") no-repeat 9px center;
 }
 
 .up-icon {
-  background: #ededed url("./icons/up.png") no-repeat 9px center;
+  background: #ededed url("./assets/icons/up.png") no-repeat 9px center;
 }
 
 .bin-icon {
-  background: #ededed url("./icons/bin.png") no-repeat 9px center;
-} */
+  background: #ededed url("./assets/icons/bin.png") no-repeat 9px center;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

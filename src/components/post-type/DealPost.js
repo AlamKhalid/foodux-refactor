@@ -1,0 +1,88 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import PostOptions from "./PostOptions";
+
+const DealPost = ({ post, setPostsTrigger }) => {
+  return (
+    <>
+      <div className="d-flex justify-content-between">
+        <div className="d-flex">
+          <img
+            className="displayPostPicture"
+            src={post.postBy.profilePic}
+            alt=""
+          />
+          <div className="d-flex flex-column align-items-start">
+            <span>
+              <NavLink
+                className="userName"
+                to={`/restaurant/${post.postBy._id}`}
+              >
+                {post.postBy.name}
+              </NavLink>
+              {` added a deal`}
+            </span>
+            <div className="d-flex justify-content-between">
+              <span className="mr-3 postDetails text-muted">
+                <i className="fa fa-bank"></i>
+              </span>
+              <span className="text-muted postDetails mr-3">
+                <i className="fa fa-calendar mr-1"></i>
+                {post.date}
+              </span>
+              <span className="text-muted postDetails mr-3">
+                <i className="fa fa-clock-o mr-1"></i>
+                {post.time}
+              </span>
+              <span className="postDetails text-muted mr-3">
+                <i className="fa fa-money mr-1"></i>
+                {post.dealPrice}
+              </span>
+              <span className="mr-3 postDetails text-muted">
+                <i className="fa fa-cutlery mr-1"></i>
+                {post.dealItems.toString()}
+              </span>
+            </div>
+          </div>
+        </div>
+        <PostOptions
+          post={post}
+          setPostsTrigger={setPostsTrigger}
+          id="addDeal"
+        />
+      </div>
+      <div className="text-left postBody my-3">{post.postBody}</div>
+      <div className="d-flex justify-content-between mb-2">
+        <span>
+          <span className="font-weight-bold mr-2">
+            <i className="fa fa-times mr-2"></i>Old Price:
+          </span>
+          Rs. {post.oldPrice}
+        </span>
+        <span>
+          <span className="font-weight-bold mr-2">
+            <i className="fa fa-check mr-2"></i>New Price:
+          </span>
+          Rs. {post.dealPrice}
+        </span>
+        <span>
+          <span className="font-weight-bold mr-2">
+            <i className="fa fa-bookmark-o mr-2"></i>Save
+          </span>
+          Rs. {post.oldPrice - post.dealPrice}
+        </span>
+      </div>
+      <hr />
+      <div>
+        Valid on
+        <span className="font-weight-bold ml-2">{post.validOn}</span>
+      </div>
+      <div className="mb-3">
+        Valid Till
+        <span className="font-weight-bold ml-2">{post.validTill}</span>
+      </div>
+    </>
+  );
+};
+
+export default DealPost;

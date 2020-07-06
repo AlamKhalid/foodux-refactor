@@ -22,19 +22,12 @@ import VerifyUserRoute from "./pages/VerifyUserRoute";
 import { isLoggedIn } from "./store/slices/user";
 import "react-toastify/dist/ReactToastify.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import "./assets/styles/home.css";
-import "./assets/styles/footer.css";
-import "./assets/styles/landing-navbar.css";
-import "./assets/styles/about.css";
-import "./assets/styles/verify.css";
-import "./assets/styles/newsfeed.css";
-import "./assets/styles/navbar.css";
-import "./assets/styles/settings.css";
-// import "./App.css";
-// import "./AppMediaQueries.css";
+import "./App.css";
+import "./AppMediaQueries.css";
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(isLoggedIn());
   }, [dispatch]);

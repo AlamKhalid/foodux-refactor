@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import EditorPopup from "../../hoc/EditorPopup";
 import { storage } from "../../firebase/index";
 import { getHome } from "./../../store/slices/home";
-import { getUser } from "../../services/userService";
+import { getUser } from "../../store/slices/user";
 
 const AddAnnouncementPopup = () => {
   const [postBody, setPostBody] = useState("");
