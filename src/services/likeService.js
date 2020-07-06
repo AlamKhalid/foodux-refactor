@@ -1,6 +1,6 @@
 import http from "./httpService";
 
-const endPointUrl = "http://localhost:4000/api/likes";
+const endPointUrl = "/likes";
 
 export function like(body) {
   return http.post(`${endPointUrl}/inc`, body);

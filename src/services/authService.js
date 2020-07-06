@@ -1,6 +1,6 @@
 import http from "./httpService";
 
-const endPointUrl = "http://localhost:4000/api/auth";
+const endPointUrl = "/auth";
 
 export function login(obj) {
   return http.post(endPointUrl, obj);
