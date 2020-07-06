@@ -5,14 +5,15 @@ import { getAllLikedPosts } from "../../services/likeService";
 import { getHiddenPosts, getAllUserPosts } from "../../services/userService";
 import { getPosts } from "../../services/postService";
 import { getUser } from "../../store/slices/user";
+import LoadingSpinner from "./../common/LoadingSpinner";
 
 const Posts = ({ profile }) => {
+  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const [hiddenPosts, setHiddenPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const [postsTrigger, setPostsTrigger] = useState(false);
-  const [loaded, setLoaded] = useState(true);
 
   const { user } = useSelector(getUser);
 
@@ -26,27 +27,28 @@ const Posts = ({ profile }) => {
         const { data } = await getAllUserPosts(user._id);
         userPosts = data;
       }
-      if (loaded) {
-        setHiddenPosts(hiddenPosts);
-        setPosts(posts);
-        setLikedPosts(likedPosts);
-        setUserPosts(userPosts);
-      }
+      setHiddenPosts(hiddenPosts);
+      setPosts(posts);
+      setLikedPosts(likedPosts);
+      setUserPosts(userPosts);
+      setLoading(false);
     };
+    setLoading(true);
     getData();
-    return () => setLoaded(false);
-  }, [postsTrigger]);
+  }, [postsTrigger, profile, user]);
 
   let toShowPosts = posts.filter(
     (post) => hiddenPosts.indexOf(post._id) === -1
   );
   if (profile) {
-    toShowPostsPosts = toShowPosts.filter(
+    toShowPosts = toShowPosts.filter(
       (post) => userPosts.indexOf(post._id) > -1
     );
   }
-
-  return toShowPosts.length > 0 ? (
+  console.log(loading);
+  return loading ? (
+    <LoadingSpinner />
+  ) : toShowPosts.length > 0 ? (
     toShowPosts.map((post) => (
       <Post
         key={post._id}

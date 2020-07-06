@@ -63,7 +63,7 @@ const AddComment = ({ postId, commentInputRef, setPostTrigger, userPic }) => {
         type="text"
         name="commentBody"
         value={commentBody}
-        onChange={handleChange}
+        onChange={({ target }) => setCommentBody(target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}

@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import $ from "jquery";
 import { toast } from "react-toastify";
-import OwnCommentOptions from "./ownCommentOptions";
-import OtherCommentOptions from "./otherCommentOptions";
+import OwnCommentOptions from "../comment-components/OwnCommentOptions";
+import OtherCommentOptions from "../comment-components/OtherCommentOptions";
 import { unhideComment } from "./../../services/userService";
 import { getUser } from "../../store/slices/user";
 
@@ -12,11 +12,12 @@ const Comment = ({ hidden, setPostTrigger, comment, post }) => {
   const [commentOptionClass, setCommentOptionClass] = useState("d-none"); // hides the comment's options, show them only on hover
   const [hiddenCommentClass, setHiddenCommentClass] = useState(""); // shows hidden comments with low opacity
   const { user } = useSelector(getUser);
+
   useEffect(() => {
     $('[data-toggle-second="tooltip"]').tooltip(); // for data-toggle = tooltip
     const hiddenCommentClass = hidden ? "hidden-comment" : ""; // to show hidden comments as hidden
     setHiddenCommentClass(hiddenCommentClass);
-  }, []);
+  }, [hidden]);
 
   const showOptions = () => {
     // function to show comment's option on hover
@@ -47,6 +48,8 @@ const Comment = ({ hidden, setPostTrigger, comment, post }) => {
       toast.error("Error unhiding comment");
     }
   };
+
+  const { commentBy, commentBody, _id } = comment;
 
   return (
     <>

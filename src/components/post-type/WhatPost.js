@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import PostOptions from "./PostOptions";
+import PostOptions from "../post-components/PostOptions";
 
 const WhatPost = ({ post, setPostsTrigger }) => {
   const count = [1, 2, 3, 4, 5];

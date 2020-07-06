@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import PostOptions from "./PostOptions";
+import PostOptions from "../post-components/PostOptions";
 
 const DealPost = ({ post, setPostsTrigger }) => {
   return (

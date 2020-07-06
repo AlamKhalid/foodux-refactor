@@ -12,11 +12,12 @@ const PostButtons = ({ liked, postId, setPostTrigger, commentInputRef }) => {
     let likeBtnClass = "";
     if (liked) likeBtnClass = " app-color";
     else likeBtnClass = "-o";
-    this.setState({ likeBtnClass });
-  }, []);
+    setLikeBtnClass(likeBtnClass);
+  }, [liked]);
 
   const handleLike = async () => {
-    let likeBtnClass, response;
+    setLikeBtnClass(likeBtnClass === "-o" ? " app-color" : "-o");
+    let response;
     const body = {
       postId: postId,
       userId: user._id,
@@ -24,18 +25,11 @@ const PostButtons = ({ liked, postId, setPostTrigger, commentInputRef }) => {
     };
     if (likeBtnClass === "-o") {
       response = await like(body);
-      if (response) likeBtnClass = " app-color";
-      else {
-        toast.error("Error liking post");
-      }
+      if (!response) toast.error("Error liking post");
     } else {
       response = await unlike(body);
-      if (response) likeBtnClass = "-o";
-      else {
-        toast.error("Error unliking post");
-      }
+      if (!response) toast.error("Error unliking post");
     }
-    setLikeBtnClass(likeBtnClass);
     setPostTrigger((prevState) => !prevState);
   };
 
