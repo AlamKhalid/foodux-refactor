@@ -8,7 +8,7 @@ export default ({ dispatch }) => (next) => async (action) => {
     next(action);
     try {
       const response = await axios.request({
-        baseURL: "http://localhost:4000/api",
+        baseURL: "https://foodux-backend.herokuapp.com/api",
         url,
         method,
         data,
