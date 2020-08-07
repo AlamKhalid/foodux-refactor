@@ -42,6 +42,14 @@ export function getHiddenComments(id) {
   return http.get(`${endPointUrl}/${id}/hidden-comments`);
 }
 
+export function savePost(body) {
+  return http.post(`${endPointUrl}/save-post/add`, body);
+}
+
+export function unsavePost(body) {
+  return http.post(`${endPointUrl}/save-post/remove`, body);
+}
+
 export function hidePost(body) {
   return http.post(`${endPointUrl}/hidden-post/add`, body);
 }
@@ -100,4 +108,20 @@ export function startFollowing(id, body) {
 
 export function stopFollowing(id, body) {
   return http.post(`${endPointUrl}/${id}/stop-following-user`, body);
+}
+
+export function getFeaturedRestaurants() {
+  return http.get(`${endPointUrl}/restaurants/featured`);
+}
+
+export function getSavedPosts(id) {
+  return http.get(`${endPointUrl}/${id}/saved-posts`);
+}
+
+export function getDeals() {
+  return http.get(`${endPointUrl}/restaurants/get-deals-and-discounts`);
+}
+
+export function getUserNotifications(id) {
+  return http.get(`${endPointUrl}/${id}/notifications`);
 }

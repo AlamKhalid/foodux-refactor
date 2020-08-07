@@ -1,6 +1,17 @@
 import React from "react";
+import { unhidePost } from "./../../services/userService";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/slices/user";
+import { useHistory } from "react-router-dom";
 
 const HorizontalMenu = ({ id, items, label }) => {
+  const { user } = useSelector(getUser);
+  const history = useHistory();
+  const handleUnhide = async (id) => {
+    await unhidePost({ postId: id, userId: user._id });
+    window.location.reload();
+  };
+
   const outerWrapper =
     items.length / 4 !== 1 ? Math.ceil(items.length / 4) : items.length / 4;
   const array = [];
@@ -29,14 +40,17 @@ const HorizontalMenu = ({ id, items, label }) => {
                 <div className="card mb-2">
                   <img
                     className="card-img-top"
-                    src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
+                    src={
+                      item.images[0] ||
+                      "https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
+                    }
                     alt=""
                   />
                   <div className="card-body">
                     <div className="d-flex">
                       <img
                         className="displayPostPicture"
-                        src="https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg?w=1200"
+                        src={item.postBy.profilePic}
                         alt=""
                       />
                       <div className="d-flex flex-column">
@@ -54,7 +68,20 @@ const HorizontalMenu = ({ id, items, label }) => {
                       </div>
                     </div>
                     <p className="card-text mt-2">{item.postBody}</p>
-                    <button className="btn foodux-btn">Show More</button>
+                    <button
+                      className="btn foodux-btn"
+                      onClick={() => history.push("/post/" + item._id)}
+                    >
+                      Show More
+                    </button>
+                    {label === "hidden" && (
+                      <button
+                        className="btn btn-primary mt-2"
+                        onClick={() => handleUnhide(item._id)}
+                      >
+                        Unhide
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

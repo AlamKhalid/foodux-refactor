@@ -39,7 +39,7 @@ const BasicSettingsRes = ({ user, setUser }) => {
           </label>
           <input
             type="text"
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={user._id}
             disabled
           />
@@ -51,7 +51,7 @@ const BasicSettingsRes = ({ user, setUser }) => {
             type="text"
             value={name}
             onChange={({ target }) => setName(target.value)}
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             required
           />
           <br /> <br />
@@ -60,7 +60,7 @@ const BasicSettingsRes = ({ user, setUser }) => {
           </label>
           <input
             type="email"
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={user.email}
             disabled
           />
@@ -68,7 +68,7 @@ const BasicSettingsRes = ({ user, setUser }) => {
           <label className="label-1 w-10">Website</label>
           <input
             type="url"
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={user.website}
             onChange={({ target }) => setWebsite(target.value)}
           />

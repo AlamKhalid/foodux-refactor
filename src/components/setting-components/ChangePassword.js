@@ -55,7 +55,7 @@ const ChangePassword = ({ setUser }) => {
             type="password"
             value={oldPass}
             onChange={({ target }) => setOldPass(target.value)}
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             placeholder="Type in old password"
           />
           <br /> <br />
@@ -64,7 +64,7 @@ const ChangePassword = ({ setUser }) => {
             type="password"
             value={newPass}
             onChange={({ target }) => setNewPass(target.value)}
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             placeholder="Type in new password"
           />
           <br /> <br />

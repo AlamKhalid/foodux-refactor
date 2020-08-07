@@ -37,7 +37,6 @@ const ConfirmUpdateMarkupComment = ({
   };
 
   const handleDisable = () => {
-    const { editedComment, comment } = this.state;
     if (editedComment === comment) return true;
     if (editedComment.length === 0) return true;
     return false;

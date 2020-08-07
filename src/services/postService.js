@@ -21,3 +21,7 @@ export function deletePost(post) {
 export function submitPost(post) {
   return http.post(endPointUrl, post);
 }
+
+export function getSearchResult(val) {
+  return http.get(`${endPointUrl}/search?value=${val}`);
+}

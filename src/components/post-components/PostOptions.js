@@ -4,7 +4,7 @@ import OtherPostOptions from "./OtherPostOptions";
 import OwnPostOptions from "./OwnPostOptions";
 import { getUser } from "../../store/slices/user";
 
-const PostOptions = ({ post, setPostsTrigger, id }) => {
+const PostOptions = ({ post, setPostsTrigger, id, saved }) => {
   const { user } = useSelector(getUser);
   const { postBy } = post;
 
@@ -21,7 +21,11 @@ const PostOptions = ({ post, setPostsTrigger, id }) => {
       {postBy._id === user._id ? (
         <OwnPostOptions post={post} setPostsTrigger={setPostsTrigger} id={id} />
       ) : (
-        <OtherPostOptions postId={post._id} setPostsTrigger={setPostsTrigger} />
+        <OtherPostOptions
+          postId={post._id}
+          setPostsTrigger={setPostsTrigger}
+          saved={saved}
+        />
       )}
     </div>
   );

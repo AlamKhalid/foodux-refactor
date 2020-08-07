@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import PostOptions from "../post-components/PostOptions";
 
-const ReviewPost = ({ post, setPostsTrigger }) => {
+const ReviewPost = ({ post, setPostsTrigger, saved }) => {
   const count = [1, 2, 3, 4, 5];
   return (
     <>
@@ -52,6 +52,7 @@ const ReviewPost = ({ post, setPostsTrigger }) => {
         <PostOptions
           post={post}
           setPostsTrigger={setPostsTrigger}
+          saved={saved}
           id="addReview"
         />
       </div>

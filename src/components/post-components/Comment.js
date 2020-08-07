@@ -61,7 +61,12 @@ const Comment = ({ hidden, setPostTrigger, comment, post }) => {
         >
           <img className="commentPic" src={commentBy.profilePic} alt="" />
           <div className="text-justify comment">
-            <NavLink className="userName mr-2" to="/">
+            <NavLink
+              className="userName mr-2"
+              to={`/${commentBy.isRestaurant ? "restaurant" : "user"}/${
+                commentBy._id
+              }`}
+            >
               {commentBy.name}
             </NavLink>
             <span>{commentBody}</span>

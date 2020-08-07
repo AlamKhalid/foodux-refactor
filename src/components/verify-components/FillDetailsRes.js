@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Multiselect } from "multiselect-react-dropdown";
-import ChooseBranch from "../common/ChooseBranch";
+import Select from "react-select";
+import BranchRes from "../common/BranchRes";
 import { getTypes } from "../../services/typeService";
 import { addDetails } from "../../services/userService";
 import { storage } from "../../firebase/index";
@@ -15,10 +15,10 @@ const FillDetailsRes = () => {
   const [phone, setPhone] = useState("");
   const [type, setType] = useState([]);
   const [typeOptions, setTypeOptions] = useState([]);
+  const [serveOptions, setServeOptions] = useState([]);
   const [serves, setServes] = useState([]);
   const [cities, setCities] = useState([]);
   const [branches, setBranches] = useState([]);
-  const [branchOptions, setBranchOptions] = useState([]);
   const [count, setCount] = useState(1);
   const [branchCount, setBranchCount] = useState([{ id: 1 }]);
   const [profilePic, setProfilePic] = useState("");
@@ -27,43 +27,28 @@ const FillDetailsRes = () => {
 
   const history = useHistory();
   const { user } = useSelector(getUser);
-  const { foods: serveOptions, cities: city } = useSelector(getHome);
-
-  const commonStyle = {
-    inputField: {
-      width: "15%",
-      padding: "0",
-      margin: "0",
-      border: "none",
-    },
-    searchBox: {
-      width: "100%",
-      backgroundColor: "white",
-    },
-    chips: { color: "white", background: "black" },
-  };
+  const { foods, cities: city } = useSelector(getHome);
 
   useEffect(() => {
     async function getData() {
       const { data: types } = await getTypes();
-      setTypeOptions(types);
-      setCities(city);
+      setTypeOptions(
+        types.map((type) => ({ value: type._id, label: type.name }))
+      );
+      setServeOptions(
+        foods.map((food) => ({ value: food._id, label: food.name }))
+      );
     }
     getData();
-  }, [city]);
-
-  const addSubareas = (id) => {
-    const city = cities.find((city) => city._id === id);
-    // setBranchOptions(city.subareas.map((subarea) => subarea.name));
-    setBranchOptions(city.subareas);
-  };
+    setCities(city);
+  }, [city, foods]);
 
   const submitDetails = async (event) => {
     event.preventDefault();
     setLoading(true);
     const response = await addDetails(user._id, {
-      serves,
-      type,
+      serves: serves.map((s) => s.value),
+      type: type.map((t) => t.value),
       phone,
       branches,
       menuPic,
@@ -133,7 +118,6 @@ const FillDetailsRes = () => {
           />
         </div>
       </div>
-
       <div className="row mb-2">
         <div className="col-6">
           <div className="custom-file mb-3 w-75 text-left">
@@ -176,44 +160,32 @@ const FillDetailsRes = () => {
               (ex. Thai, Fast Food)
             </label>
           </div>
-          <Multiselect
+          <Select
+            isMulti
+            name="type"
             options={typeOptions}
-            displayValue="name"
             placeholder="Max. 5"
-            id="type"
-            onSelect={(selectedList, selectedItem) => {
-              setType([...type, selectedItem._id]);
-            }}
-            onRemove={(selectedList, removedItem) => {
-              setType(type.filter((tp) => tp !== removedItem._id));
-            }}
-            avoidHighlightFirstOption="true"
-            closeIcon="cancel"
-            selectionLimit="5"
-            style={{
-              multiselectContainer: {
-                width: "50%",
-                height: "fit-content",
-                border: "none",
-                borderRadius: "7px",
-                padding: "0",
-                magin: "0",
+            className="w-50 text-left"
+            onChange={setType}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary25: "gray",
+                primary: "black",
               },
-              ...commonStyle,
-            }}
+            })}
           />
         </div>
 
         {branchCount.map((item) => (
-          <ChooseBranch
+          <BranchRes
             key={item.id}
             cities={cities}
-            options={branchOptions}
             setBranchCount={setBranchCount}
-            addSubareas={addSubareas}
             branches={branches}
             setBranches={setBranches}
-            setBranchOptions={setBranchOptions}
             branchCount={branchCount}
             itemId={item.id}
             setCities={setCities}
@@ -232,29 +204,21 @@ const FillDetailsRes = () => {
           <label htmlFor="food" className="label-1 mr-5">
             Serves
           </label>
-          <Multiselect
-            id="food"
+          <Select
+            isMulti
+            name="serve"
             options={serveOptions}
-            displayValue="name"
-            avoidHighlightFirstOption="true"
-            closeIcon="cancel"
-            onSelect={(selectedList, selectedItem) => {
-              setServes([...serves, selectedItem._id]);
-            }}
-            onRemove={(selectedList, removedItem) => {
-              setServes(serves.filter((serve) => serve !== removedItem._id));
-            }}
-            style={{
-              multiselectContainer: {
-                width: "50%",
-                height: "fit-content",
-                border: "none",
-                borderRadius: "7px",
-                padding: "0",
-                magin: "0",
+            className="w-50 text-left"
+            onChange={setServes}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary25: "gray",
+                primary: "black",
               },
-              ...commonStyle,
-            }}
+            })}
           />
         </div>
         <div className="d-flex justify-content-center ml-5">

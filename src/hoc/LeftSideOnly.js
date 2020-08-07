@@ -5,10 +5,10 @@ const LeftSideOnly = (Component) => {
   return (props) => (
     <div className="container my-3">
       <div className="row">
-        <div className="col-3">
+        <div className="d-none d-lg-block col-lg-3">
           <LeftSidebar />
         </div>
-        <div className="col-9">
+        <div className="col-12 col-lg-9">
           <Component {...props} />
         </div>
       </div>

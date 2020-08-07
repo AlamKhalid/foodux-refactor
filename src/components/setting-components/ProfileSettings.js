@@ -50,7 +50,7 @@ const ProfileSettings = ({ user, cities, restaurants, foods, setUser }) => {
           </label>
           <input
             type="text"
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={bio}
             onChange={({ target }) => setBio(target.value)}
             required
@@ -60,7 +60,7 @@ const ProfileSettings = ({ user, cities, restaurants, foods, setUser }) => {
             Lives In
           </label>
           <select
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={livesIn}
             onChange={({ target }) => setLivesIn(target.value)}
             required
@@ -77,7 +77,7 @@ const ProfileSettings = ({ user, cities, restaurants, foods, setUser }) => {
             Fav Restaurant
           </label>
           <select
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={favRes}
             onChange={({ target }) => setFavRes(target.value)}
             required

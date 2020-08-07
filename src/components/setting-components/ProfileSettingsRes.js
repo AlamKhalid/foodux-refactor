@@ -1,60 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import { updateProfileSettings } from "../../services/userService";
-import { Multiselect } from "multiselect-react-dropdown";
-import ChooseBranch from "../common/ChooseBranch";
+import Select from "react-select";
+import BranchRes from "../common/BranchRes";
+import { getHome } from "./../../store/slices/home";
 
 const ProfileSettingsRes = ({ user, types, cities, foods, setUser }) => {
   const [phone, setPhone] = useState(user.phone);
-  const [branches] = useState(user.branches);
+  const [branches, setBranches] = useState(user.branches);
   const [cityOptions, setCityOptions] = useState(
     cities.filter((city) =>
       branches.find((b) => b.city === city.name) ? false : true
     )
   );
-  const [type, setType] = useState(user.type);
-  const [serves, setServes] = useState(user.serves);
-  const [branchOptions, setBranchOptions] = useState({});
-  const [newBranches, setNewBranches] = useState([]);
+  const [type, setType] = useState(
+    user.type.map((t) => ({ label: t.name, value: t._id }))
+  );
+  const [serves, setServes] = useState(
+    user.serves.map((s) => ({ label: s.name, value: s._id }))
+  );
   const [count, setCount] = useState(user.branches.length);
   const [branchCount, setBranchCount] = useState(
     user.branches.map((b, i) => {
       return { id: i + 1, city: b.city, sub: b.subareas };
     })
   );
+  const { cities: allCities } = useSelector(getHome);
   const [disableBtn, setDisableBtn] = useState(true);
-
-  const commonStyle = {
-    inputField: {
-      width: "15%",
-      padding: "0",
-      margin: "0",
-      border: "none",
-    },
-    searchBox: {
-      width: "100%",
-      backgroundColor: "white",
-    },
-    chips: { color: "white", background: "black" },
-  };
-
-  const addSubareas = (id, itemId) => {
-    const city = cities.find((city) => city._id === id);
-    branchCount.forEach((b) => {
-      if (b.id === itemId) {
-        b.city = city.name;
-        b.subareas = [];
-      }
-    });
-  };
-
-  useEffect(() => {
-    const obj = {};
-    cities.forEach((city) => {
-      obj[city.name] = city.subareas.map((sub) => sub.name);
-    });
-    setBranchOptions(obj);
-  }, [cities]);
 
   useEffect(() => {
     if (user.phone !== phone.trim()) setDisableBtn(false);
@@ -83,49 +56,38 @@ const ProfileSettingsRes = ({ user, types, cities, foods, setUser }) => {
     >
       <div className="card-body">
         <form method="post" onSubmit={updateData}>
-          <div className="d-flex">
+          <div className="d-flex flex-column flex-md-row">
             <label className="label-1 w-10">Type</label>
-            <Multiselect
-              options={types}
-              displayValue="name"
-              selectedValues={type}
+            <Select
+              isMulti
+              name="type"
+              defaultValue={type}
+              options={types.map((t) => ({ label: t.name, value: t._id }))}
               placeholder="Max. 5"
-              onSelect={(selectedList) => {
-                setType(selectedList);
-              }}
-              onRemove={(selectedList) => {
-                setType(selectedList);
-              }}
-              avoidHighlightFirstOption="true"
-              closeIcon="cancel"
-              selectionLimit="5"
-              style={{
-                multiselectContainer: {
-                  width: "50%",
-                  height: "fit-content",
-                  border: "none",
-                  borderRadius: "7px",
-                  padding: "0",
-                  magin: "0",
+              className="w-50 text-left"
+              onChange={setType}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: "gray",
+                  primary: "black",
                 },
-                ...commonStyle,
-              }}
+              })}
             />
           </div>
           <br />
           {branchCount.map((item) => (
-            <ChooseBranch
+            <BranchRes
               key={item.id}
               cities={cityOptions}
-              options={branchOptions[item.city]}
+              branches={branches}
+              setBranches={setBranches}
               setBranchCount={setBranchCount}
-              addSubareas={addSubareas}
-              branches={newBranches}
-              setBranches={setNewBranches}
-              setBranchOptions={setBranchOptions}
               branchCount={branchCount}
+              allCities={allCities}
               itemId={item.id}
-              values={item.sub}
               edit={true}
               defaultCity={cities.find((city) => city.name === item.city)}
               setCities={setCityOptions}
@@ -140,38 +102,31 @@ const ProfileSettingsRes = ({ user, types, cities, foods, setUser }) => {
           >
             <i className="fa fa-plus mr-2"></i>Add another branch
           </p>
-          <div className="d-flex">
+          <div className="d-flex flex-column flex-md-row">
             <label className="label-1 w-10">Serves</label>
-            <Multiselect
-              options={foods}
-              displayValue="name"
-              selectedValues={serves}
-              avoidHighlightFirstOption="true"
-              closeIcon="cancel"
-              onSelect={(selectedList) => {
-                setServes(selectedList);
-              }}
-              onRemove={(selectedList) => {
-                setServes(selectedList);
-              }}
-              style={{
-                multiselectContainer: {
-                  width: "50%",
-                  height: "fit-content",
-                  border: "none",
-                  borderRadius: "7px",
-                  padding: "0",
-                  magin: "0",
+            <Select
+              isMulti
+              name="serve"
+              defaultValue={serves}
+              options={foods.map((f) => ({ label: f.name, value: f._id }))}
+              className="w-50 text-left"
+              onChange={setServes}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: "gray",
+                  primary: "black",
                 },
-                ...commonStyle,
-              }}
+              })}
             />
           </div>
           <br />
           <label className="label-1 w-10">Phone</label>
           <input
             type="text"
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={phone}
             onChange={({ target }) => setPhone(target.value)}
             required

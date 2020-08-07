@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import PostOptions from "../post-components/PostOptions";
 
-const RecommendationAskPost = ({ post, setPostsTrigger }) => {
+const RecommendationAskPost = ({ post, setPostsTrigger, saved }) => {
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -49,6 +49,7 @@ const RecommendationAskPost = ({ post, setPostsTrigger }) => {
           post={post}
           setPostsTrigger={setPostsTrigger}
           id="addRecommendation"
+          saved={saved}
         />
       </div>
       <div className="text-left postBody my-3">{post.postBody}</div>

@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import SearchBox from "../components/common/SearchBox";
 import { getUser } from "../store/slices/user";
+import { getUserNotifications } from "./../services/userService";
 
 const Navbar = () => {
   const [sidebarClasses, setSidebarClasses] = useState("d-none");
+  const [notifications, setNotifications] = useState([]);
   const { user } = useSelector(getUser);
   const history = useHistory();
 
@@ -15,12 +17,16 @@ const Navbar = () => {
     $('[data-toggle-second="tooltip"]').on("click", function () {
       $(this).tooltip("hide");
     });
-  });
+    const getNotifications = async () => {
+      const { data } = await getUserNotifications(user._id);
+      setNotifications(data);
+    };
+    getNotifications();
+  }, [user._id]);
 
   const handleClick = () => {
-    const sidebarClasses =
-      this.state.sidebarClasses === "d-none" ? "d-lg-none" : "d-none";
-    setSidebarClasses(sidebarClasses);
+    const classes = sidebarClasses === "d-none" ? "d-lg-none" : "d-none";
+    setSidebarClasses(classes);
   };
 
   // refresh profile...
@@ -41,7 +47,7 @@ const Navbar = () => {
             Newsfeed
           </NavLink>
           <NavLink
-            to="/foodblog"
+            to="/food-blog"
             className="sidebar-item"
             activeClassName="sidebar-item-active"
           >
@@ -99,9 +105,6 @@ const Navbar = () => {
                 data-placement="bottom"
                 title="Profile"
                 activeClassName=""
-                // onClick={() => {
-                //   if (refreshProfile) refreshProfile(user._id);
-                // }}
               >
                 {user.name}
               </NavLink>
@@ -122,7 +125,24 @@ const Navbar = () => {
                 Notifications
               </Link>
               <div className="dropdown-menu" aria-labelledby="notifications">
-                <span className="dropdown-item">1 Notifications</span>
+                {notifications.length > 0 ? (
+                  notifications.map((n) => (
+                    <span className="dropdown-item" key={n._id}>
+                      <img
+                        src={n.doneBy.profilePic}
+                        alt=""
+                        className="displayPostPicture"
+                      />
+                      <span>{`${n.doneBy.name} has ${n.notType} ${
+                        n.notType === "liked" || n.notType === "commented on"
+                          ? "your post"
+                          : "you"
+                      }`}</span>
+                    </span>
+                  ))
+                ) : (
+                  <span className="dropdown-item">No Notifications</span>
+                )}
               </div>
             </li>
             <li className="nav-item dropdown">
@@ -152,6 +172,11 @@ const Navbar = () => {
                 {user.isEditor && (
                   <NavLink className="dropdown-item" to="/editor">
                     <i className="fa fa-pencil mr-2"></i>Editor
+                  </NavLink>
+                )}
+                {user.isAdmin && (
+                  <NavLink className="dropdown-item" to="/admin">
+                    <i className="fa fa-lock mr-2"></i>Admin
                   </NavLink>
                 )}
                 <div className="dropdown-divider"></div>

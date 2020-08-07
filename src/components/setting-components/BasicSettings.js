@@ -71,7 +71,7 @@ const BasicSettings = ({ user, setUser }) => {
           </label>
           <input
             type="text"
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={user._id}
             disabled
           />
@@ -83,7 +83,7 @@ const BasicSettings = ({ user, setUser }) => {
             type="text"
             value={name}
             onChange={({ target }) => setName(target.value)}
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             required
           />
           <br /> <br />
@@ -92,14 +92,14 @@ const BasicSettings = ({ user, setUser }) => {
           </label>
           <input
             type="email"
-            className="form-control text-box w-50 d-inline"
+            className="form-control text-box w-50 d-block d-md-inline"
             value={user.email}
             disabled
           />
           <br /> <br />
           <label className="label-1 w-10">Birthday</label>
           <select
-            className="form-control text-box w-10 d-inline mr-3"
+            className="form-control text-box w-10 d-block d-md-inline mr-3 mb-2 mb-md-0"
             value={date}
             onChange={({ target }) => setDate(target.value)}
             required
@@ -110,7 +110,7 @@ const BasicSettings = ({ user, setUser }) => {
             ))}
           </select>
           <select
-            className="form-control text-box w-10 d-inline mr-3"
+            className="form-control text-box w-10 d-block d-md-inline mr-3 mb-2 mb-md-0"
             value={month}
             onChange={({ target }) => setMonth(target.value)}
             required
@@ -121,7 +121,7 @@ const BasicSettings = ({ user, setUser }) => {
             ))}
           </select>
           <select
-            className="form-control text-box w-10 d-inline mr-3"
+            className="form-control text-box w-10 d-block d-md-inline mr-3"
             value={year}
             onChange={({ target }) => setYear(target.value)}
             required

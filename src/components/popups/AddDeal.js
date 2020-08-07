@@ -14,6 +14,7 @@ import { getUser } from "../../store/slices/user";
 import "react-datepicker/dist/react-datepicker.css";
 
 const AddDeal = () => {
+  const [loading, setLoading] = useState(false);
   const [postId, setPostId] = useState("");
   const [postBody, setPostBody] = useState("");
   const [postType, setPostType] = useState("");
@@ -118,22 +119,29 @@ const AddDeal = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const date = validTill.toString();
     let [m, d, y] = date.slice(4, date.indexOf(":") - 3).split(" ");
     const months = {
-      January: "01",
-      February: "02",
-      March: "03",
-      April: "04",
+      Jan: "01",
+      Feb: "02",
+      Mar: "03",
+      Apr: "04",
       May: "05",
-      June: "06",
-      July: "07",
-      August: "08",
-      September: "09",
-      October: "10",
-      November: "11",
-      December: "12",
+      Ju: "06",
+      Jul: "07",
+      Aug: "08",
+      Sep: "09",
+      Oct: "10",
+      Nov: "11",
+      Dec: "12",
     };
+
+    let newValidTill;
+    if (edit) {
+      const dates = JSON.stringify(validTill).substring(1, 11).split("-");
+      newValidTill = `${dates[2]}-${dates[1]}-${dates[0]}`;
+    }
 
     const obj =
       postType === "Deal"
@@ -169,7 +177,7 @@ const AddDeal = () => {
             dealItems: [...foodIncluded],
             postBody,
             oldPrice,
-            validTill,
+            validTill: newValidTill,
             images: imageURLS,
           }
         : {
@@ -178,12 +186,13 @@ const AddDeal = () => {
             discount,
             exceptFor: [...exceptFor],
             postBody,
-            validTill,
+            validTill: newValidTill,
             images: imageURLS,
           };
     const response = edit
       ? await updatePost(postId, obj1)
       : await submitPost(obj);
+    setLoading(false);
     if (response) {
       window.location.reload();
       toast(`Post ${edit ? "updated" : "added"} successfully`);
@@ -331,7 +340,10 @@ const AddDeal = () => {
                       dateFormat="dd-MM-yyyy"
                       className="expand up-icon mr-2"
                       selected={validTill}
-                      onChange={(date) => setValidTill(date)}
+                      onChange={(date) => {
+                        setValidTill(date);
+                        console.log(date);
+                      }}
                     />
                   </span>
                   <span data-toggle="modal" data-target="#dealFoodsPopup">
@@ -358,7 +370,17 @@ const AddDeal = () => {
               )}
             </div>
             {edit ? (
-              <button className="btn btn-warning">Update</button>
+              loading ? (
+                <button className="btn btn-warning" disabled={disableBtn}>
+                  Updating...
+                </button>
+              ) : (
+                <button className="btn btn-warning">Update</button>
+              )
+            ) : loading ? (
+              <button className="btn foodux-btn" disabled={disableBtn}>
+                Posting...
+              </button>
             ) : (
               <button className="btn foodux-btn" disabled={disableBtn}>
                 Post

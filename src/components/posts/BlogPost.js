@@ -1,7 +1,9 @@
 import React from "react";
 import ReactHtmlParser from "react-html-parser";
+import { useHistory } from "react-router-dom";
 
 const BlogPost = ({ post }) => {
+  const history = useHistory();
   return (
     <div className="card" style={{ maxWidth: "30%" }}>
       <img
@@ -26,7 +28,12 @@ const BlogPost = ({ post }) => {
               }
             },
           })}
-          <span className="foodux-link font-weight-bolder">Show more...</span>
+          <span
+            className="foodux-link font-weight-bolder"
+            onClick={() => history.push("/food-blog/" + post._id)}
+          >
+            Show more...
+          </span>
         </div>
       </div>
       <div className="card-footer">

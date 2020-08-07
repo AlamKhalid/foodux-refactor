@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import PostOptions from "../post-components/PostOptions";
 
-const AnnouncementPost = ({ post, setPostsTrigger }) => {
+const AnnouncementPost = ({ post, setPostsTrigger, saved }) => {
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -48,6 +48,7 @@ const AnnouncementPost = ({ post, setPostsTrigger }) => {
         <PostOptions
           post={post}
           setPostsTrigger={setPostsTrigger}
+          saved={saved}
           id="addAnnouncement"
         />
       </div>

@@ -127,7 +127,7 @@ const LandingNavbar = ({ isHome }) => {
                 <React.Fragment>
                   <li>
                     <button
-                      className="btn btn-outline-light mr-2"
+                      className="btn btn-outline-light mr-2 mb-3 mb-md-0"
                       data-toggle="modal"
                       data-target="#login"
                     >

@@ -12,13 +12,17 @@ import Cities from "./pages/Cities";
 import Verify from "./pages/Verify";
 import NotFound from "./pages/NotFound";
 import Newsfeed from "./pages/Newsfeed";
+import SingleBlogPost from "./pages/SingleBlogPost";
+import SinglePost from "./pages/SinglePost";
 import FoodBlog from "./pages/FoodBlog";
 import Settings from "./pages/Settings";
 import DealsAndDiscounts from "./pages/DealsAndDiscounts";
-// import Profile from "./components/profile";
+import Profile from "./pages/Profile";
 import Logout from "./pages/Logout";
-// import EditorPage from "./components/editor";
+import EditorPage from "./pages/Editor";
+import AdminPage from "./pages/AdminPage";
 import VerifyUserRoute from "./pages/VerifyUserRoute";
+import Search from "./pages/Search";
 import { isLoggedIn } from "./store/slices/user";
 import "react-toastify/dist/ReactToastify.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -36,25 +40,29 @@ const App = () => {
     <>
       <ToastContainer />
       <Switch>
-        {/* 
-          <ProtectedRoute path="/user/:id/" component={Profile} user={user} />
-          <ProtectedRoute
-            path="/restaurant/:id/"
-            component={Profile}
-            user={user}
-          />
-          <ProtectedRoute path="/editor" component={EditorPage} user={user} />
-          
-           */}
+        <ProtectedVerifiedRoute path="/editor" exact component={EditorPage} />
+        <ProtectedVerifiedRoute path="/admin" exact component={AdminPage} />
+
         <ProtectedVerifiedRoute
           path="/user/:id/settings"
           component={Settings}
+          exact
         />
         <ProtectedVerifiedRoute
           path="/restaurant/:id/settings"
           component={Settings}
+          exact
         />
+        <ProtectedVerifiedRoute path="/search" component={Search} />
+        <ProtectedVerifiedRoute path="/user/:id/" component={Profile} />
+        <ProtectedVerifiedRoute path="/restaurant/:id/" component={Profile} />
         <Route path="/:id/verify" component={VerifyUserRoute} />
+        <ProtectedVerifiedRoute
+          path="/food-blog/:id"
+          exact
+          component={SingleBlogPost}
+        />
+        <ProtectedVerifiedRoute path="/post/:id" exact component={SinglePost} />
         <ProtectedVerifiedRoute path="/food-blog" component={FoodBlog} />
         <ProtectedVerifiedRoute
           path="/deals-and-discounts"

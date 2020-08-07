@@ -15,7 +15,7 @@ import WhatPost from "../post-type/WhatPost";
 import ImageInPosts from "../post-components/ImageInPosts";
 import { getUser } from "../../store/slices/user";
 
-const Post = ({ post, liked, profile, setPostsTrigger }) => {
+const Post = ({ post, liked, setPostsTrigger, saved }) => {
   const commentInputRef = useRef(null);
   const [comments, setComments] = useState([]); // stores the comments array on a single post
   const [hiddenComments, setHiddenComments] = useState([]); // stores the hidden comments ids for a single user
@@ -88,22 +88,38 @@ const Post = ({ post, liked, profile, setPostsTrigger }) => {
   return (
     <div className="bg-light pt-3 px-3 pb-2 my-2 rounded-lg">
       {post.postType === "Review" && (
-        <ReviewPost setPostsTrigger={setPostsTrigger} post={post} />
+        <ReviewPost
+          setPostsTrigger={setPostsTrigger}
+          post={post}
+          saved={saved}
+        />
       )}
       {post.postType === "Deal" && (
-        <DealPost setPostsTrigger={setPostsTrigger} post={post} />
+        <DealPost setPostsTrigger={setPostsTrigger} post={post} saved={saved} />
       )}
       {post.postType === "Discount" && (
-        <DiscountPost setPostsTrigger={setPostsTrigger} post={post} />
+        <DiscountPost
+          setPostsTrigger={setPostsTrigger}
+          post={post}
+          saved={saved}
+        />
       )}
       {post.postType === "Announcement" && (
-        <AnnouncementPost setPostsTrigger={setPostsTrigger} post={post} />
+        <AnnouncementPost
+          setPostsTrigger={setPostsTrigger}
+          post={post}
+          saved={saved}
+        />
       )}
       {post.postType === "Recommendation" && (
-        <RecommendationAskPost setPostsTrigger={setPostsTrigger} post={post} />
+        <RecommendationAskPost
+          setPostsTrigger={setPostsTrigger}
+          post={post}
+          saved={saved}
+        />
       )}
       {post.postType === "What" && (
-        <WhatPost setPostsTrigger={setPostsTrigger} post={post} />
+        <WhatPost setPostsTrigger={setPostsTrigger} post={post} saved={saved} />
       )}
       <ImageInPosts images={post.images} />
       <div className="d-flex justify-content-between mb-2">
@@ -145,7 +161,7 @@ const Post = ({ post, liked, profile, setPostsTrigger }) => {
         commentInputRef={commentInputRef}
         postId={post._id}
         setPostTrigger={setPostTrigger}
-        userPic={profile ? user.profilePic : user.pic}
+        userPic={user.profilePic || user.pic}
       />
     </div>
   );

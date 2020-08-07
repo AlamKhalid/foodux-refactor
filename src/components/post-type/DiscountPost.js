@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import PostOptions from "../post-components/PostOptions";
 
-const DealPost = ({ post, setPostsTrigger }) => {
+const DealPost = ({ post, setPostsTrigger, saved }) => {
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -49,6 +49,7 @@ const DealPost = ({ post, setPostsTrigger }) => {
           post={post}
           setPostsTrigger={setPostsTrigger}
           id="addDeal"
+          saved={saved}
         />
       </div>
       <div className="text-left postBody my-3">{post.postBody}</div>
